@@ -141,3 +141,19 @@ ORDER BY FirstName desc
 SELECT TOP 20 percent
 FROM Person 
 ORDER BY FirstName desc
+
+/*
+Group BY tatement groups rows that have the same values into summary rows
+The GROUP BY statement is often used with aggregate functions to group the result-set by one or more columns.
+*/
+
+SELECT City,Sum(Salary) as [Total Salary]
+FROM person
+GROUP BY City
+
+-- using having to filter with groupby
+
+SELECT City,Sum(Salary) as [Total Salary]
+FROM person
+GROUP BY City
+HAVING City = 'Cairo'
