@@ -157,3 +157,50 @@ SELECT City,Sum(Salary) as [Total Salary]
 FROM person
 GROUP BY City
 HAVING City = 'Cairo'
+
+
+/* Joins are used to retrieve data from 2 or more related tables by foreign keys
+    there are 3 types of joins (INNER JOIN - OUTER JOIN - CROSS JOIN)
+    and the outer join divided to (LEFT - RIGHT - FULL) JOIN */
+
+
+-- INNER JOIN return just matching rows between 2 tables
+SELECT FirstName, Gender, Salary, DepartmentName
+FROM Employees INNER JOIN Departments
+ON Employees.DepartmentId = Departments.DepartmentId
+
+-- LEFT JOIN return all rows from left table + matching rows
+SELECT FirstName, Gender, Salary, DepartmentName
+FROM Employees LEFT JOIN Departments
+ON Employees.DepartmentId = Departments.DepartmentId
+
+-- RIGHT JOIN return all rows from right table + matching rows
+SELECT FirstName, Gender, Salary, DepartmentName
+FROM Employees RIGHT JOIN Departments
+ON Employees.DepartmentId = Departments.DepartmentId
+
+-- FULL JOIN return all rows from the 2 tables
+SELECT FirstName, Gender, Salary, DepartmentName
+FROM Employees FULL JOIN Departments
+ON Employees.DepartmentId = Departments.DepartmentId
+
+-- CROSS JOIN return cartesian product of the rows of the 2 tables
+SELECT FirstName, Gender, Salary, DepartmentName
+FROM Employees CROSS JOIN Departments
+
+
+/* Self Joins (INNER self join - OUTER self join - CROSS self JOIN) */
+
+-- if you want to retrieve employees and their managers and it's in 
+-- just one table so you can use self join 
+SELECT E.FirstName AS [Employee Name], M.Name AS [Manager Name]
+FROM Employee E INNER JOIN Employee M
+ON E.ManagerId = M.ID
+
+
+-- Replacing Null value (you can do it with ISNULL, Coalesce, CASE statement)
+SELECT E.FirstName AS [Employee Name], ISNULL(M.Name, 'No Manager') AS [Manager Name]
+FROM Employee E LEFT JOIN Employee M
+ON E.ManagerId = M.ID
+
+
